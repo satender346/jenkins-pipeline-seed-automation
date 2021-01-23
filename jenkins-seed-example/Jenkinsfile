@@ -1,0 +1,14 @@
+node("master"){
+    stage("Input paramters") {
+      print "$SITE_NAME"
+      print "$GIT_BRANCH"
+      print "$EXECUTE_TEST_CASE"
+      print "$FILE_PATH"
+    }
+    stage("Clone repo") {
+      print "cloning repos"
+   }
+   stage("Deployment") {
+      print "Running deployment of site"
+   }
+}
