@@ -11,7 +11,6 @@ pipelineJob("${JOB_NAME}") {
   stringParam('SITE_NAME', 'dev1', 'Site name')
   stringParam('GIT_BRANCH', 'main', 'GIT Branch name')
   booleanParam('EXECUTE_TEST_CASE', true, 'Run test case')
-  
   environmentVariables(
     "FILE_PATH": "/var/jenkins_home/sample_file",
   )
@@ -25,6 +24,4 @@ pipelineJob("${JOB_NAME}") {
           }
         }
      }
-  }
-
-
+}
