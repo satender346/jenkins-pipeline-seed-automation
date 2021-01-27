@@ -1,0 +1,21 @@
+// Sample pipeline to promote image in harbor registry
+// Note:
+//  1. ARTF_SECURE_DOCKER_URL variable you can set in jenkins global configuration or create locally here
+//  2. change the node value
+
+node("dev"){
+    stage("Pulling image") {
+       sh "docker pull ${IMAGE_NAME}"
+    }
+    stage("Tagging docker image"){
+      sh "docker tag ${IMAGE_NAME} ${ARTF_SECURE_DOCKER_URL}/library/${IMAGE_NAME}"
+    }
+    stage("Pushing image to harbor registry"){
+      wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: '$HARBOR_USER_PASSWORD', var: 'SECRET']]]) {
+          opts = '-u $HARBOR_USER_NAME -p $HARBOR_USER_PASSWORD'
+          sh "docker login ${opts} ${ARTF_SECURE_DOCKER_URL}"
+          sh "docker push ${ARTF_SECURE_DOCKER_URL}/library/${IMAGE_NAME}"
+      }
+
+    }
+}
