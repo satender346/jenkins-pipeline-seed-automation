@@ -18,8 +18,8 @@ pipelineJob("${JOB_FOLDER}/${JOB_NAME}") {
          }
          string {
               defaultValue("master")
-              description("Pegleg image")
-              name("PEGLEG_IMAGE")
+              description("git branch name")
+              name("GIT_BRANCH")
               trim(true)
          }
          booleanParam {
