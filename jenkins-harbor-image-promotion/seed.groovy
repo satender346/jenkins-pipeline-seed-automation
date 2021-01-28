@@ -16,17 +16,6 @@ pipelineJob("${JOB_FOLDER}/${JOB_NAME}") {
             name("IMAGE_NAME")
             trim(true)
          }
-         string {
-              defaultValue("admin")
-              description("Harbor user name")
-              name("HARBOR_USER_NAME")
-              trim(true)
-         }
-         password {
-              defaultValueAsSecret("Harbor12345")
-              description("Harbor password")
-              name("HARBOR_USER_PASSWORD")
-        }
   }
   concurrentBuild(false)
   triggers {

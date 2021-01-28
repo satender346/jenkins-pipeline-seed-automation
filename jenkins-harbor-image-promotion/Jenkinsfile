@@ -11,7 +11,9 @@ node("dev"){
       sh "docker tag ${IMAGE_NAME} ${ARTF_SECURE_DOCKER_URL}/library/${IMAGE_NAME}"
     }
     stage("Pushing image to harbor registry"){
-      wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: '$HARBOR_USER_PASSWORD', var: 'SECRET']]]) {
+      withCredentials([usernamePassword(credentialsId: 'harbor-credentials',
+                      usernameVariable: "HARBOR_USER_NAME",
+                      passwordVariable: "HARBOR_USER_PASSWORD")]) {
           opts = '-u $HARBOR_USER_NAME -p $HARBOR_USER_PASSWORD'
           sh "docker login ${opts} ${ARTF_SECURE_DOCKER_URL}"
           sh "docker push ${ARTF_SECURE_DOCKER_URL}/library/${IMAGE_NAME}"
