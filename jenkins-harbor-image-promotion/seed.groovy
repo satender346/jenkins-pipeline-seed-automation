@@ -22,7 +22,7 @@ pipelineJob("${JOB_FOLDER}/${JOB_NAME}") {
               name("HARBOR_USER_NAME")
               trim(true)
          }
-         nonStoredPasswordParam {
+         password {
               defaultValue("Harbor12345")
               description("Harbor password")
               name("HARBOR_USER_PASSWORD")
