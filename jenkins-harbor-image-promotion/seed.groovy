@@ -23,7 +23,7 @@ pipelineJob("${JOB_FOLDER}/${JOB_NAME}") {
               trim(true)
          }
          password {
-              defaultValue("Harbor12345")
+              defaultValueAsSecret("Harbor12345")
               description("Harbor password")
               name("HARBOR_USER_PASSWORD")
         }
